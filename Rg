@@ -1,0 +1,665 @@
+// TC-2 Locators
+
+By getRadiologyModuleLocator =
+        By.xpath("//a[contains(text(),'Radiology')]");
+
+By getListRequestLocator =
+        By.xpath("//a[contains(text(),'List Requests')]");
+
+By getWardBillingLocator =
+        By.xpath("//a[contains(text(),'Ward Billing')]");
+
+By getSearchTextboxLocator =
+        By.id("quickFilterInput");
+
+By getSearchButtonLocator =
+        By.xpath("//button[contains(text(),'Search')]");
+
+By getResetButtonLocator =
+        By.xpath("//button[contains(text(),'Reset')]");
+
+
+// TC-4 Locators
+
+By getTableLocator =
+        By.xpath("//table");
+
+By getTableRowsLocator =
+        By.xpath("//table/tbody/tr");
+
+By getTableColumnsLocator =
+        By.xpath("//table/tbody/tr/td");
+
+By getRequestedOnDateColumnLocator =
+        By.xpath("//table/tbody/tr/td[3]");
+
+By getPatientNameColumnLocator =
+        By.xpath("//table/tbody/tr/td[2]");
+
+By getStatusColumnLocator =
+        By.xpath("//table/tbody/tr/td[5]");
+
+By getPaginationNextButtonLocator =
+        By.xpath("//button[contains(text(),'Next')]");
+
+By getPaginationPreviousButtonLocator =
+        By.xpath("//button[contains(text(),'Previous')]");
+
+By getNoRecordsFoundMessageLocator =
+        By.xpath("//*[contains(text(),'No Records Found')]");
+
+
+// ================================
+// TC-1
+// ================================
+
+public boolean loginToRadiology(
+        String username,
+        String password) throws Exception {
+
+    try {
+
+        WebElement usernameTextbox =
+                commonEvents.findElement(
+                        getUsernameTextfieldLocator);
+
+        commonEvents.highlight(usernameTextbox);
+        commonEvents.sendKeys(
+                usernameTextbox,
+                username);
+
+        WebElement passwordTextbox =
+                commonEvents.findElement(
+                        getPasswordTextboxLocator);
+
+        commonEvents.highlight(passwordTextbox);
+        commonEvents.sendKeys(
+                passwordTextbox,
+                password);
+
+        WebElement signInButton =
+                commonEvents.findElement(
+                        getSignInButtonLocator);
+
+        commonEvents.highlight(signInButton);
+        commonEvents.click(signInButton);
+
+        Thread.sleep(2000);
+
+        WebElement radiologyModule =
+                commonEvents.findElement(
+                        getRadiologyLocator);
+
+        commonEvents.highlight(radiologyModule);
+
+        return commonEvents.isDisplayed(radiologyModule);
+
+    } catch (Exception e) {
+
+        throw e;
+    }
+}
+
+
+// ================================
+// TC-2
+// ================================
+
+public boolean verifyRadiologyModulesDisplayed()
+        throws Exception {
+
+    try {
+
+        WebElement radiologyModule =
+                commonEvents.findElement(
+                        getRadiologyModuleLocator);
+
+        WebElement listRequestModule =
+                commonEvents.findElement(
+                        getListRequestLocator);
+
+        WebElement wardBillingModule =
+                commonEvents.findElement(
+                        getWardBillingLocator);
+
+        commonEvents.highlight(radiologyModule);
+
+        commonEvents.highlight(listRequestModule);
+
+        commonEvents.highlight(wardBillingModule);
+
+        boolean result =
+                commonEvents.isDisplayed(radiologyModule)
+                        &&
+                        commonEvents.isDisplayed(listRequestModule)
+                        &&
+                        commonEvents.isDisplayed(wardBillingModule);
+
+        System.out.println(
+                "All modules displayed : "
+                        + result);
+
+        return result;
+
+    } catch (Exception e) {
+
+        throw e;
+    }
+}
+
+
+// ================================
+// TC-3
+// ================================
+
+public boolean verifySearchBarAndFilterDisplayed()
+        throws Exception {
+
+    try {
+
+        WebElement searchBar =
+                commonEvents.findElement(searchBarId);
+
+        WebElement dateRangeButton =
+                commonEvents.findElement(
+                        getDateRangeButton);
+
+        WebElement filterDropdown =
+                commonEvents.findElement(
+                        getFilterDropdownLocator);
+
+        commonEvents.highlight(searchBar);
+
+        commonEvents.highlight(dateRangeButton);
+
+        commonEvents.highlight(filterDropdown);
+
+        boolean result =
+                commonEvents.isDisplayed(searchBar)
+                        &&
+                        commonEvents.isDisplayed(dateRangeButton)
+                        &&
+                        commonEvents.isDisplayed(filterDropdown);
+
+        return result;
+
+    } catch (Exception e) {
+
+        throw e;
+    }
+}
+
+
+// ================================
+// TC-4
+// ================================
+
+public boolean verifyTableDataDisplayed()
+        throws Exception {
+
+    try {
+
+        WebElement table =
+                commonEvents.findElement(
+                        getTableLocator);
+
+        commonEvents.highlight(table);
+
+        List<WebElement> rows =
+                commonEvents.getWebElements(
+                        getTableRowsLocator);
+
+        System.out.println(
+                "Total rows : "
+                        + rows.size());
+
+        if (rows.size() > 0) {
+
+            return true;
+        }
+
+    } catch (Exception e) {
+
+        throw e;
+    }
+
+    return false;
+}
+
+
+// ================================
+// TC-5
+// ================================
+
+public boolean verifyNextButtonIsDisplayed() {
+
+    boolean isNextButtonDisplayed = false;
+
+    try {
+
+        JavascriptExecutor jsExecutor =
+                (JavascriptExecutor) driver;
+
+        WebElement nextButton =
+                commonEvents.findElement(
+                        getButtonLocatorsBytext);
+
+        jsExecutor.executeScript(
+                "arguments[0].scrollIntoView(true);",
+                nextButton);
+
+        jsExecutor.executeScript(
+                "window.scrollBy(0,-50)");
+
+        commonEvents.highlight(nextButton);
+
+        isNextButtonDisplayed =
+                commonEvents.isDisplayed(nextButton);
+
+        System.out.println(
+                "isNextButtonDisplayed >> "
+                        + isNextButtonDisplayed);
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+    }
+
+    return isNextButtonDisplayed;
+}
+
+
+// ================================
+// TC-6
+// ================================
+
+public boolean verifyDatesAreRememberedCorrectly(
+        String fromDate,
+        String toDate) throws Exception {
+
+    try {
+
+        String[] fromDateComponents =
+                fromDate.split("-");
+
+        String fromDay =
+                fromDateComponents[0];
+
+        String fromMonth =
+                fromDateComponents[1];
+
+        String fromYear =
+                fromDateComponents[2];
+
+        String[] toDateComponents =
+                toDate.split("-");
+
+        String toDay =
+                toDateComponents[0];
+
+        String toMonth =
+                toDateComponents[1];
+
+        String toYear =
+                toDateComponents[2];
+
+        WebElement fromDateDropdown =
+                commonEvents.findElement(
+                        calendarFromDropdown);
+
+        WebElement toDateDropdown =
+                commonEvents.findElement(
+                        calendarToDropdown);
+
+        WebElement okButton =
+                commonEvents.findElement(
+                        getOkButtonLocator);
+
+        commonEvents.highlight(fromDateDropdown);
+
+        commonEvents.sendKeys(
+                fromDateDropdown,
+                fromDay);
+
+        commonEvents.sendKeys(
+                fromDateDropdown,
+                fromMonth);
+
+        commonEvents.sendKeys(
+                fromDateDropdown,
+                fromYear);
+
+        commonEvents.highlight(toDateDropdown);
+
+        commonEvents.sendKeys(
+                toDateDropdown,
+                toDay);
+
+        commonEvents.sendKeys(
+                toDateDropdown,
+                toMonth);
+
+        commonEvents.sendKeys(
+                toDateDropdown,
+                toYear);
+
+        WebElement toolTip =
+                commonEvents.findElement(
+                        getStarIconLocator);
+
+        commonEvents.click(toolTip);
+
+        commonEvents.highlight(okButton);
+
+        commonEvents.click(okButton);
+
+        commonEvents.click(
+                getPageBarFixedLocatorWardBilling);
+
+        commonEvents.click(
+                getPageBarFixedLocatorListRequests);
+
+        commonEvents.waitTillElementVisible(
+                getOkButtonLocator,
+                10000);
+
+        String actualFromDate =
+                fromDay + "-"
+                        + fromMonth + "-"
+                        + fromYear;
+
+        String actualToDate =
+                toDay + "-"
+                        + toMonth + "-"
+                        + toYear;
+
+        if (actualFromDate.equals(fromDate)
+                &&
+                actualToDate.equals(toDate)) {
+
+            return true;
+        }
+
+    } catch (Exception e) {
+
+        throw e;
+    }
+
+    return false;
+}
+
+
+// ================================
+// TC-7.1
+// ================================
+
+public boolean clickDateRangeDropdownAndSelectLast1Week()
+        throws Exception {
+
+    try {
+
+        WebElement dateRangeButton =
+                commonEvents.findElement(
+                        getSelectDateRangeDropDown);
+
+        commonEvents.highlight(dateRangeButton);
+
+        commonEvents.click(dateRangeButton);
+
+        WebElement valueToSelectElement =
+                commonEvents.findElement(
+                        getAnchorTagLocatorByTextLast1Week);
+
+        commonEvents.highlight(
+                valueToSelectElement);
+
+        commonEvents.click(
+                valueToSelectElement);
+
+        boolean isValueSelected =
+                commonEvents
+                        .getAttribute(
+                                valueToSelectElement,
+                                "class")
+                        .contains(
+                                "selected-range");
+
+        WebElement okButton =
+                commonEvents.findElement(
+                        getOkButtonLocator);
+
+        commonEvents.highlight(okButton);
+
+        commonEvents.click(okButton);
+
+        return isValueSelected;
+
+    } catch (Exception e) {
+
+        throw e;
+    }
+}
+
+
+// ================================
+// TC-7.2
+// ================================
+
+public boolean verifyToDataRangeBySelectOneWeekOptionFromDropdown(
+        String fromDate,
+        String toDate) throws Exception {
+
+    try {
+
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern(
+                        "dd-MM-yyyy");
+
+        DateTimeFormatter inputFormatter =
+                DateTimeFormatter.ofPattern(
+                        "yyyy-MM-dd");
+
+        List<WebElement> actualDatesAfterFilterApplied =
+                commonEvents.getWebElements(
+                        getActualRequestedOnDates);
+
+        LocalDate from =
+                LocalDate.parse(
+                        fromDate,
+                        formatter);
+
+        LocalDate to =
+                LocalDate.parse(
+                        toDate,
+                        formatter);
+
+        for (WebElement dateElement :
+                actualDatesAfterFilterApplied) {
+
+            commonEvents.highlight(dateElement);
+
+            String dateText =
+                    dateElement.getText();
+
+            LocalDate date;
+
+            LocalDate newDate;
+
+            try {
+
+                date =
+                        LocalDate.parse(
+                                dateText,
+                                inputFormatter);
+
+                newDate =
+                        LocalDate.parse(
+                                date.format(formatter),
+                                formatter);
+
+            } catch (Exception e) {
+
+                return false;
+            }
+
+            if (newDate.isBefore(from)
+                    ||
+                    newDate.isAfter(to)) {
+
+                return false;
+            }
+        }
+
+        return true;
+
+    } catch (Exception e) {
+
+        throw e;
+    }
+}
+
+
+// ================================
+// TC-8
+// ================================
+
+public boolean verifyDataFromTableByEnteringDataXRAYInSearchField(
+        String dropDownValue)
+        throws Exception {
+
+    try {
+
+        WebElement dropdownElement =
+                driver.findElement(
+                        getFilterDropdownLocator);
+
+        commonEvents.highlight(dropdownElement);
+
+        commonEvents.click(dropdownElement);
+
+        Select dropdown =
+                new Select(dropdownElement);
+
+        dropdown.selectByVisibleText(
+                dropDownValue);
+
+        Thread.sleep(1000);
+
+        List<WebElement> imagingTypeNameElements =
+                commonEvents.getWebElements(
+                        getImagingTypeName);
+
+        commonEvents.click(searchBarId);
+
+        if (imagingTypeNameElements.size() > 0) {
+
+            for (WebElement imagingTypeNameElement :
+                    imagingTypeNameElements) {
+
+                commonEvents.highlight(
+                        imagingTypeNameElement);
+
+                String imagingTypeNameElementText =
+                        imagingTypeNameElement
+                                .getText()
+                                .trim();
+
+                if (!imagingTypeNameElementText
+                        .equalsIgnoreCase(
+                                dropDownValue)) {
+
+                    return false;
+                }
+            }
+
+            return true;
+
+        } else {
+
+            throw new Exception(
+                    "No Imaging records found");
+        }
+
+    } catch (Exception e) {
+
+        throw new Exception(
+                "Failed to verify table data",
+                e);
+    }
+}
+
+
+// ================================
+// TC-9
+// ================================
+
+public String verifyRadiologyWardBillingCancellationPopup(
+        Map<String, String> radiologyExpectedData) {
+
+    String failedRemarksMsg = "";
+
+    try {
+
+        commonEvents.click(
+                getAnchorTagLocatorByTextWardBilling);
+
+        Thread.sleep(1000);
+
+        WebElement searchBar =
+                commonEvents.findElement(searchBarId);
+
+        commonEvents.highlight(searchBar);
+
+        commonEvents.click(searchBar);
+
+        commonEvents.sendKeys(
+                searchBar,
+                radiologyExpectedData.get(
+                        "patientName"));
+
+        commonEvents.click(
+                wardBillingViewDetailsbutton);
+
+        boolean isModalDisplayed =
+                commonEvents.isDisplayed(
+                        wardBillingModal);
+
+        System.out.println(
+                "isModalDisplayed : "
+                        + isModalDisplayed);
+
+        List<WebElement> cancelButton =
+                commonEvents.getWebElements(
+                        getButtonLocatorsBytextCancel);
+
+        WebElement firstCancelButton =
+                cancelButton.get(0);
+
+        commonEvents.highlight(firstCancelButton);
+
+        commonEvents.click(firstCancelButton);
+
+        WebElement failedMessageElement =
+                commonEvents.findElement(
+                        getPopUpMessageText);
+
+        failedRemarksMsg =
+                failedMessageElement.getText();
+
+        commonEvents.click(popupCloseButton);
+
+        commonEvents.click(
+                getAnchorTagLocatorByTextX);
+
+        commonEvents.click(
+                getAnchorTagLocatorByTextListRequests);
+
+        return failedRemarksMsg;
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+    }
+
+    return failedRemarksMsg;
+}
