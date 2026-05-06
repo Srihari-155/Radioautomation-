@@ -43,3 +43,63 @@ public void scrollDownAndClickRadiologyTab() throws Exception {
         throw e;
     }
 }
+
+
+public String verifyRadiologyPageTitle() throws Exception {
+
+    try {
+
+        String titleToVerify = commonEvents.getTitle();
+
+        System.out.println("Radiology Page Title : " + titleToVerify);
+
+        return titleToVerify;
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+        throw e;
+    }
+}
+
+
+/**
+ * @Test2
+ * about this method highlightAndVerifyWhetherElementIsDisplayed
+ *
+ * @param element : By - Locator of the element to be highlighted and verified
+ *
+ * @description : This method verifies whether an element is displayed
+ *                on the page, highlights it if displayed, and returns
+ *                true if displayed.
+ *
+ * @return : boolean - true if the element is displayed, otherwise false
+ *
+ * @author : YAKSHA
+ */
+
+public boolean verifyRadiologySubModules(By element) {
+
+    boolean isElementDisplayed = false;
+
+    try {
+
+        if (commonEvents.isDisplayed(element)) {
+
+            WebElement elementToHighlight =
+                    commonEvents.findElement(element);
+
+            commonEvents.highlight(elementToHighlight);
+
+            isElementDisplayed = true;
+
+            System.out.println("Element is displayed");
+        }
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+    }
+
+    return isElementDisplayed;
+}
