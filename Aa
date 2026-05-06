@@ -1,0 +1,45 @@
+/**
+ * @Test1.2
+ * Scrolls down to the Radiology tab and clicks on it.
+ * 
+ * @description : verify the radiology tab, scroll to it, and click it
+ * 
+ * @throws Exception
+ */
+
+public void scrollDownAndClickRadiologyTab() throws Exception {
+
+    try {
+
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+        WebElement radiologyTab =
+                commonEvents.findElement(getRadiologyLocator);
+
+        // Scroll till element visible
+        jsExecutor.executeScript(
+                "arguments[0].scrollIntoView(true);",
+                radiologyTab);
+
+        // Small upward adjustment
+        jsExecutor.executeScript("window.scrollBy(0,-50)");
+
+        // Highlight element
+        commonEvents.highlight(radiologyTab);
+
+        // Click Radiology tab
+        commonEvents.click(radiologyTab);
+
+        // Wait for page load
+        commonEvents.waitForUrlContains(
+                "Radiology/ImagingRequisitionList",
+                10);
+
+        System.out.println("Radiology tab clicked successfully");
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+        throw e;
+    }
+}
