@@ -1,0 +1,60 @@
+public async ConfirmPassword() {
+  await this.AdminLink.click();
+  await this.AddButton.click();
+
+  await this.password.fill("Admin@123");
+  await this.confirmPassword.fill("Admin@124");
+
+  await this.page.waitForTimeout(1000);
+}
+
+public async orgStructure() {
+  await this.AdminLink.click();
+  await this.OrgTab.click();
+  await this.orgStructureOption.click();
+
+  await this.page.waitForTimeout(2000);
+}
+
+
+public async adminSort() {
+  await this.AdminLink.click();
+
+  await this.sortUserName.click();
+  await this.page.waitForTimeout(1000);
+
+  await this.sortUserName.click();
+  await this.page.waitForTimeout(2000);
+}
+
+public async GenInfoTab() {
+  await this.AdminLink.click();
+  await this.OrgTab.click();
+  await this.generalInfo.click();
+
+  await this.page.waitForTimeout(2000);
+}
+
+public async upgrade() {
+  await this.AdminLink.click();
+
+  const [newPage] = await Promise.all([
+    this.page.context().waitForEvent("page"),
+    this.upgradeButton.click()
+  ]);
+
+  await newPage.waitForLoadState();
+
+  console.log(await newPage.title());
+}
+
+public async helpHover() {
+  await this.AdminLink.click();
+
+  await this.helpbutton.hover();
+  await this.page.waitForTimeout(1000);
+
+  const tooltip = await this.helpbutton.getAttribute("title");
+  console.log(tooltip);
+}
+
