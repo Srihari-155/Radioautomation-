@@ -1,0 +1,93 @@
+this.strctTab = page.locator("//a[text()='Structure']");
+
+this.genInfo = page.locator("//a[text()='General Information']");
+
+this.OrgTab = page.locator("//span[text()='Organization']");
+
+this.AdminLink = page.locator("//span[text()='Admin']");
+
+this.editbutton = page.locator("//i[contains(@class,'bi-pencil-fill')]");
+
+this.deleteButton = page.locator("//i[contains(@class,'bi-trash')]");
+
+this.deleteButtonConfirm = page.locator("//button[normalize-space()='Yes, Delete']");
+
+this.empName = page.locator("//input[@placeholder='Type for hints...']");
+
+this.empNameSubmit = page.locator("//button[normalize-space()='Search']");
+
+this.sortUsername = page.locator("//div[text()='Username']");
+
+this.upgradeButton = page.locator("//button[contains(.,'Upgrade')]");
+
+this.maintitle = page.locator("//h6");
+
+this.admindropdown = page.locator("(//i[contains(@class,'oxd-icon bi-caret-down-fill')])[1]");
+
+this.adminSearch = page.locator("(//input[@class='oxd-input oxd-input--active'])[2]");
+
+this.searchButton = page.locator("//button[normalize-space()='Search']");
+
+this.AddButton = page.locator("//button[normalize-space()='Add']");
+
+this.userRoleElements = page.locator("//div[@role='option']");
+
+this.confirmPassword = page.locator("(//input[@type='password'])[2]");
+
+this.username = page.locator("(//input[@class='oxd-input oxd-input--active'])[2]");
+
+
+
+
+this.sucessMessage = page.locator("//div[contains(@class,'oxd-toast-content')]");
+
+this.usernameButton = page.locator("//div[text()='Username']");
+
+this.deleteConfirm = page.locator("//button[normalize-space()='Yes, Delete']");
+
+this.userRole = page.locator("(//div[contains(@class,'oxd-select-text')])[1]");
+
+this.sortDesc = page.locator("//i[contains(@class,'bi-sort-down')]");
+
+this.sortUsername = page.locator("//div[text()='Username']");
+
+this.helpbutton = page.locator("//button[contains(@title,'Help')]");
+
+
+
+
+this.leave = page.locator("//span[text()='Leave']");
+
+this.leaveDropdown = page.locator("//span[contains(text(),'Leave')]");
+
+this.configure = page.locator("//span[text()='Configure']");
+
+this.holiday = page.locator("//a[text()='Holidays']");
+
+this.button = page.locator("//button[normalize-space()='Add']");
+
+this.holidayName = page.locator("(//input[@class='oxd-input oxd-input--active'])[2]");
+
+this.holidayDateDDMMYYYY = page.locator("//input[@placeholder='dd-mm-yyyy']");
+
+this.holidayDateYYYYMMDD = page.locator("//input[@placeholder='yyyy-mm-dd']");
+
+this.holidayDateYYYYDDMM = page.locator("//input[@placeholder='yyyy-dd-mm']");
+
+this.saveButton = page.locator("//button[normalize-space()='Save']");
+
+this.holidayList = page.locator("//div[@role='table']");
+
+
+
+this.usernameInput = page.locator("//input[@name='username']");
+
+this.passwordInput = page.locator("//input[@name='password']");
+
+this.loginButton = page.locator("//button[@type='submit']");
+
+this.loginErrorMessage = page.locator("//p[contains(@class,'alert-content-text')]");
+
+this.adminButton = page.locator("//span[@class='oxd-userdropdown-tab']");
+
+this.logout = page.locator("//a[text()='Logout']");
