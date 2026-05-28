@@ -1,0 +1,28 @@
+async createNewLeaveRequest() {
+
+  await this.leave.click();
+
+  await this.configure.click();
+
+  await this.holiday.click();
+
+  await this.button.click();
+
+  await this.holidayName.fill(DevoPart.HolidayName);
+
+  // Fill date based on visible field
+  if (await this.holidayDateDDMMYYYY.isVisible()) {
+    await this.holidayDateDDMMYYYY.fill("01-01-2025");
+  }
+  else if (await this.holidayDateYYYYMMDD.isVisible()) {
+    await this.holidayDateYYYYMMDD.fill("2025-01-01");
+  }
+  else if (await this.holidayDateYYYYDDMM.isVisible()) {
+    await this.holidayDateYYYYDDMM.fill("2025-01-01");
+  }
+
+  await this.saveButton.click();
+
+  await this.page.waitForTimeout(3000);
+
+}
