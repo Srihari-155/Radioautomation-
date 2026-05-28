@@ -1,0 +1,23 @@
+public async AdminAdd() {
+
+  await this.AdminLink.click();
+
+  await this.AddButton.click();
+
+  await this.userRole.selectOption("Admin");
+
+  await this.employeeName.fill("Linda Anderson");
+
+  await this.status.selectOption("Enabled");
+
+  const randomUsername = "admin" + Math.floor(Math.random() * 1000);
+  await this.username.fill(randomUsername);
+
+  await this.password.fill("Admin@123");
+
+  await this.confirmPassword.fill("Admin@123");
+
+  await this.saveButton.click();
+
+  await this.page.waitForTimeout(3000);
+}
