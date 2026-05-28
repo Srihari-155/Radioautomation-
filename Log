@@ -1,0 +1,20 @@
+async performLogOut(BaseUrl: string) {
+
+  // Step 1: Login first
+  await this.performLogin();
+
+  // Step 2: wait briefly
+  await this.page.waitForTimeout(2000);
+
+  // Step 3: Click profile icon
+  await this.adminButton.click();
+
+  // Step 4: Click logout
+  await this.logout.click();
+
+  // Step 5: Verify redirected to login page
+  await this.page.waitForURL(
+    BaseUrl + "/web/index.php/auth/login"
+  );
+
+}
