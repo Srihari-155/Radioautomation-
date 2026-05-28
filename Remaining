@@ -1,0 +1,32 @@
+this.userName = page.locator("(//input[@class='oxd-input oxd-input--active'])[2]");
+this.errormessages = page.locator("//span[contains(@class,'oxd-input-field-error-message')]");
+
+
+this.Myinfo = page.locator("//span[text()='My Info']");
+
+this.clickImage = page.locator("//img[@alt='profile picture']");
+
+this.uploadButton = page.locator("//button[contains(.,'Upload')]");
+
+this.fileInput = page.locator("//input[@type='file']");
+
+this.ImageSave = page.locator("//button[normalize-space()='Save']");
+
+this.updateMessage = page.locator("//div[contains(@class,'oxd-toast-content')]");
+
+
+
+
+async uploadProfilePicture() {
+
+  await this.Myinfo.click();
+
+  await this.clickImage.click();
+
+  await this.fileInput.setInputFiles("src/testdata/profile.jpg");
+
+  await this.ImageSave.click();
+
+  await this.updateMessage.waitFor();
+
+}
